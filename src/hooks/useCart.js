@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { getData } from "../utilities/fackdatabase";
 
 const useCart = (products) => {
-    const [cart, setCart] = useState([]);
+    const [carts, setCarts] = useState([]);
     useEffect(() => {
         let getDataItem = getData();
         let saveData = [];
-        for (const id of getDataItem) {
+        for (const id in getDataItem) {
             const addedProduct = products.find(product => product.id === id);
             if (addedProduct) {
                 const quentity = getDataItem[id];
@@ -14,10 +14,10 @@ const useCart = (products) => {
                 saveData.push(addedProduct);
             }
         }
-        setCart(saveData);
+        setCarts(saveData);
     }, [products])
 
-    return [cart, setCart];
+    return [carts, setCarts];
 
 }
 

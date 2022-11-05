@@ -1,0 +1,11 @@
+.order_main {
+    display: flex;
+}
+
+.orderLeft {
+    flex: 0 0 75%;
+}
+
+.orderRight {
+    flex: 0 0 25%;
+}

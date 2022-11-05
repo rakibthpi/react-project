@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useCart from '../../hooks/useCart';
 import { useProducts } from '../../hooks/useProducts';
 import { getData, setData } from '../../utilities/fackdatabase';
 import Cart from '../Cart/Cart';
@@ -6,29 +7,11 @@ import Shop from './Shop';
 
 const Shops = () => {
     // cart item area start 
-
-
     const [products, setProducts] = useProducts();
 
-    const [carts, setCarts] = useState([]);
-
-    useEffect(() => {
-        const shopingData = getData();
-        const saveCart = [];
-        for (const id in shopingData) {
-            const addedProduct = products.find(product => product.id === id);
-            console.log(addedProduct);
-            if (addedProduct) {
-                const quantity = shopingData[id];
-                addedProduct.quantity = quantity;
-                saveCart.push(addedProduct);
-            }
-        }
-        setCarts(saveCart);
-    }, [products])
+    const [carts, setCarts] = useCart(products);
 
     const addToCart = (productResive) => {
-        console.log(productResive);
         const { id } = productResive;
         let newItem = [];
         const axisProduct = carts.find(product => product.id === productResive.id);
@@ -65,3 +48,21 @@ const Shops = () => {
 };
 
 export default Shops;
+
+
+
+
+    // useEffect(() => {
+    //     const shopingData = getData();
+    //     const saveCart = [];
+    //     for (const id in shopingData) {
+    //         const addedProduct = products.find(product => product.id === id);
+    //         console.log(addedProduct);
+    //         if (addedProduct) {
+    //             const quantity = shopingData[id];
+    //             addedProduct.quantity = quantity;
+    //             saveCart.push(addedProduct);
+    //         }
+    //     }
+    //     setCarts(saveCart);
+    // }, [products])

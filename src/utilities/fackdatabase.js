@@ -22,8 +22,15 @@ const getData = () => {
     return shopingCart;
 }
 
-const removeData = () => {
-    localStorage.clear('shoping-cart');
+const removeData = (id) => {
+    let shopingCart = getData();
+    const quentity = shopingCart[id];
+    if (quentity) {
+        delete shopingCart[id];
+        localStorage.setItem('shoping-cart', JSON.stringify(shopingCart));
+    }
+
 }
+
 
 export { setData, getData, removeData };
